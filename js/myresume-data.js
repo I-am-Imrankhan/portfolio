@@ -1,7 +1,7 @@
 function myresumeData() {
   const experince = [
     {
-      name: "Frontend",
+      name: "eMarket",
       type: "Frontend development - EMARKET",
       purpose: "Hobby project",
       about: "ReactJS app with Firebase as backend/auth.",
