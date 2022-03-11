@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>List item detail</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/resume.min.css" rel="stylesheet">
+</head>
+
+<body class="p-0">
+  <section>
+
+    <div id="itemdetail" class="details-page">
+
+    </div>
+  </section>
+
+
+
+  <script>
+    var listItemHtmlCode = "";
+
+    var listItem_sharedStorage = JSON.parse(sessionStorage.getItem('experience-listItem'));
+
+    listItemHtmlCode =
+
+      `
+      <div class="resume-list-item ">
+        <a class="btn btn-dark w-100" href="index.html">Go back</a>
+          <div class="experience-listitem-details text-design">
+            <img class="image" src=${listItem_sharedStorage.imageurl} alt="type of development"/>
+            <div class="absolute-div">
+              <div class="relative-inside-absolute-div text-center pt-50">
+                <div class="center-div-inside-relative">
+                  <div class="d-flex justify-content-center">
+                  <h3 class="mb-0 text-design">${listItem_sharedStorage.name}</h3> <span class="align-self-end pb-1 ml-1"> project</span>
+                </div>
+                <h4 class="text-design">${listItem_sharedStorage.purpose}</h4></div>
+                </div>
+              </div>
+          </div>
+      <br>
+      
+      ${(listItem_sharedStorage.projectDetails[0].url !== "" && listItem_sharedStorage.name !== "FLUTTER") ? `
+      <div class="d-fles ">
+        <a href=${listItem_sharedStorage.projectDetails[0].url}> URL to live website: eMarket</a>
+        <img src="./img/emarket.png" class="details-page-icon" alt="icon url" />
+        </div>
+       URL to live website: eMarket</a>` : ``}
+      ${(listItem_sharedStorage.projectDetails[0].url !== "" && listItem_sharedStorage.name === "FLUTTER") ? `
+      <div class="d-fles ">
+        <a href=${listItem_sharedStorage.projectDetails[0].url}> Google console</a>
+        <img src="./img/google-console.png" class="details-page-icon" alt="icon url" />
+        </div>
+      ` : ``}
+      
+      <h6 class="pb-0 mb-0">What i have used during the project</h6>
+          <div>
+            ${renderListitmes(listItem_sharedStorage.projectDetails[2].keyPoints)}
+          </div>
+
+          Category: ${listItem_sharedStorage.type} <br>
+          <span>About company:</span> ${listItem_sharedStorage.description}
+
+          <p class="mt-5 text-center">
+            Duration: ${listItem_sharedStorage.period}
+      </p>
+        </div>
+      
+    `;
+    function renderListitmes(points) {
+      var retun_ul = ""
+      points.map((point, index) => {
+        retun_ul = retun_ul + `<ul>
+          ${point}
+          </ul>`
+      })
+      return retun_ul
+    }
+    /* $(document).on('click','#goBack',function(e){
+        window.location.href = "index.html"
+    }) */
+    const listItemCard = document.querySelector("section #itemdetail");
+
+    listItemCard.innerHTML = listItemHtmlCode;
+    //console.log(listItem_sharedStorage)
+
+  </script>
+</body>
+
+</html>
